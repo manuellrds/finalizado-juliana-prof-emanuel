@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000;
+            color: #ffd700; 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #ffd700; 
+        }
+
+        textarea {
+            width: 80%;
+            height: 300px;
+            margin: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #000;
+            color: #ffd700; 
+            border: 1px solid #ffd700; 
+            white-space: pre-wrap;
+        }
+
+        button {
+            background-color: #ffd700; 
+            color: #000;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #ffcc00; 
+        }
+    </style>
+</head>
+<body>
+    <h1>CODIGO HTML E CSS E JS DO JOGO</h1>
+
+    <textarea id="codigo" readonly>
+        //<!DOCTYPE html>
+        <html lang="pt-br">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="jogo.css">
+            <title>Jogo de Perguntas -------------- --------------Eletrônicos</title>
+        </head>
+        <body>
+        
+            <div class="container">
+                <h1>Jogo de Perguntas ---------------------------- Eletrônicos</h1>
+                <p>Aqui voce Testa seu conhecimento Na tecnologia e diversos</p>
+                <div id="pergunta-container">
+                    <p id="pergunta"></p>
+                    <div id="opcoes"></div>
+                    <p id="resposta"></p>
+                </div>
+                <button id="proxima-btn">Próxima Pergunta</button>
+            </div>
+        
+            <p class="pau"> <a href="index2.html">Voltar a pagina anterior</a></p> 
+        
+            <p>------------------ </p>
+            <p> <a href="index.html">voltar para Escolher as atividades</a></p>
+        
+            <script src="aiai.js"></script>
+           
+        </body>
+        
+        </html>
+
+        CSS -------------------------------------CSS
+        body {
+            background-color: #000;
+            color: #000000;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .pau{
+            font-size: larger;
+        }
+        
+        .container {
+            text-align: center;
+            background-color: #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        button {
+            background-color: #000;
+            color: #ffc107;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #333;
+        }
+
+        JS---------------------------------------JS
+        const perguntas = [
+    {
+        pergunta: "Qual é a marca mais famosa de smartphones?",
+        opcoes: ["Apple", "Samsung", "Huawei", "Sony"],
+        respostaCorreta: 0
+    },
+    {
+        pergunta: "Qual é o processador mais utilizado em PCs para jogos?",
+        opcoes: ["Intel Core i7", "AMD Ryzen 7", "Intel Pentium", "AMD Athlon"],
+        respostaCorreta: 1
+    },
+    {
+        pergunta: "Qual empresa produz a série de placas de vídeo GeForce?",
+        opcoes: ["AMD", "NVIDIA", "Intel", "ASUS"],
+        respostaCorreta: 1
+    },
+    {
+        pergunta: "Qual dispositivo é essencial para conectar um computador à Internet?",
+        opcoes: ["Mouse", "Teclado", "Roteador", "Impressora"],
+        respostaCorreta: 2
+    },
+    {
+        pergunta: "O que significa a sigla CPU?",
+        opcoes: ["Central Processing Unit", "Computer Personal Unit", "Central Process Unit", "Central Processor Unit"],
+        respostaCorreta: 0
+    },
+    {
+        pergunta: "Qual é o componente principal de um monitor de computador?",
+        opcoes: ["CPU", "GPU", "RAM", "Tela"],
+        respostaCorreta: 3
+    },
+    {
+        pergunta: "Qual é a função da placa-mãe em um computador?",
+        opcoes: ["Armazenar dados", "Conectar todos os componentes", "Executar programas", "Gerar energia"],
+        respostaCorreta: 1
+    },
+    {
+        pergunta: "O que é um SSD?",
+        opcoes: ["Solid State Drive", "Super Speed Drive", "Slim Storage Drive", "Software System Drive"],
+        respostaCorreta: 0
+    },
+    {
+        pergunta: "Qual é a resolução padrão de uma tela Full HD?",
+        opcoes: ["720p", "1080p", "1440p", "4K"],
+        respostaCorreta: 1
+    },
+    {
+        pergunta: "Qual é a função da BIOS em um computador?",
+        opcoes: ["Controlar o sistema operacional", "Gerenciar a memória RAM", "Iniciar o hardware", "Compactar arquivos"],
+        respostaCorreta: 2
+    }
+];
+
+const perguntaContainer = document.getElementById("pergunta-container");
+const perguntaElemento = document.getElementById("pergunta");
+const opcoesElemento = document.getElementById("opcoes");
+const respostaElemento = document.getElementById("resposta");
+const proximaBtn = document.getElementById("proxima-btn");
+
+let perguntaAtual = 0;
+
+function mostrarPergunta() {
+    respostaElemento.textContent = "";
+    perguntaContainer.classList.remove("correto", "errado");
+    const perguntaAtualObj = perguntas[perguntaAtual];
+    perguntaElemento.textContent = perguntaAtualObj.pergunta;
+    opcoesElemento.innerHTML = "";
+
+    perguntaAtualObj.opcoes.forEach((opcao, index) => {
+        const opcaoBtn = document.createElement("button");
+        opcaoBtn.textContent = opcao;
+        opcaoBtn.addEventListener("click", () => verificarResposta(index));
+        opcoesElemento.appendChild(opcaoBtn);
+    });
+}
+
+function verificarResposta(escolha) {
+    const perguntaAtualObj = perguntas[perguntaAtual];
+    if (escolha === perguntaAtualObj.respostaCorreta) {
+        respostaElemento.textContent = "Resposta Correta!";
+        respostaElemento.style.color = "green";
+        perguntaContainer.classList.add("correto");
+    } else {
+        respostaElemento.textContent = "Resposta Incorreta. A resposta correta é: " + perguntaAtualObj.opcoes[perguntaAtualObj.respostaCorreta];
+        respostaElemento.style.color = "red";
+        perguntaContainer.classList.add("errado");
+    }
+
+    proximaBtn.style.display = "block";
+}
+
+function proximaPergunta() {
+    respostaElemento.textContent = "";
+    respostaElemento.style.color = "";
+    proximaBtn.style.display = "none";
+
+    perguntaAtual++;
+    if (perguntaAtual < perguntas.length) {
+        mostrarPergunta();
+    } else {
+        perguntaElemento.textContent = "Fim do Jogo!";
+        opcoesElemento.innerHTML = "";
+    }
+}
+
+proximaBtn.addEventListener("click", proximaPergunta);
+
+mostrarPergunta();
+
+
+        
+        }
+    </textarea>
+    <p> <a href="index.html">VOLTAR PARA PAGINA INICIAL</a></p>
+
+   
+    
+</body>
+</html>
